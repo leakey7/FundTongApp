@@ -1,14 +1,18 @@
 package com.gzyslczx.ncfundscreenapp;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.gzyslczx.ncfundscreenapp.databinding.ActivityMainBinding;
 
-import android.os.Bundle;
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
-public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void InitLayout() {
+        mViewBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mViewBinding.getRoot());
+    }
+
+    @Override
+    public void InitViews() {
+
     }
 }
