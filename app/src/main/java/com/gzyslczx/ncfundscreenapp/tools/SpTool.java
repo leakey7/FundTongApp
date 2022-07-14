@@ -88,4 +88,19 @@ public class SpTool {
         }
     }
 
+    /*
+    * 更新Token及当前时间
+    * */
+    public static boolean UpdateTokenAndTime(String token){
+        if (mSharedPreferences!=null){
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putString(SpUtils.SpToken, token);
+            editor.putString(SpUtils.SpTokenTime, DateTool.Instance().GetTodayForyMdhms());
+            return editor.commit();
+        }else {
+            Log.e(SpUtils.TAG, "更新Token失败。SpTool未初始化");
+            return false;
+        }
+    }
+
 }
