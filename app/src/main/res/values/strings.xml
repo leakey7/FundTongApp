@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">FundTongApp</string>
+    <string name="app_name">基金通</string>\
+    <string name="main_page">首页</string>
+    <string name="find_page">发现</string>
+    <string name="select_page">自选</string>
+    <string name="mine_page">我的</string>
+    <string name="search_fund">输入基金名称或代码</string>
+    <string name="fund_300_compare">高分基金组合VC沪深300走势比较</string>
+    <string name="stock_type">股票型</string>
+    <string name="mix_type">混合型</string>
+    <string name="hs_300">沪深300</string>
 </resources>

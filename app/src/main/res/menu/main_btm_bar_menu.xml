@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/MainBottomHome"
+        android:icon="@drawable/btm_bar_home_selector"
+        android:title="@string/main_page" />
+
+    <item
+        android:id="@+id/MainBottomFind"
+        android:icon="@drawable/btm_bar_find_selector"
+        android:title="@string/find_page" />
+
+    <item
+        android:id="@+id/MainBottomSelect"
+        android:icon="@drawable/btm_bar_find_selector"
+        android:title="@string/select_page" />
+
+    <item
+        android:id="@+id/MainBottomMine"
+        android:icon="@drawable/btm_bar_mine_selector"
+        android:title="@string/mine_page" />
+</menu>

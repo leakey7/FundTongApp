@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/HomeFragAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/HomeFragCollapse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HomeFragTopCons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_f7"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0">
+
+            <View
+                android:id="@+id/HomeFragSearchBg"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_44"
+                android:background="@color/main_blue"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragTopCons"
+                app:layout_constraintRight_toRightOf="@id/HomeFragTopCons"
+                app:layout_constraintTop_toTopOf="@id/HomeFragTopCons" />
+
+            <!--搜索点击栏-->
+            <TextView
+                android:id="@+id/HomeFragSearchText"
+                android:layout_width="0dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:layout_marginRight="@dimen/dp_14"
+                android:background="@drawable/white_radius_10_shape"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_44"
+                android:text="@string/search_fund"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="@id/HomeFragSearchBg"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragSearchBg"
+                app:layout_constraintRight_toRightOf="@id/HomeFragSearchBg"
+                app:layout_constraintTop_toTopOf="@id/HomeFragSearchBg" />
+            <ImageView
+                android:id="@+id/HomeFragSearchImg"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/black_search"
+                app:layout_constraintBottom_toBottomOf="@id/HomeFragSearchText"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragSearchText"
+                app:layout_constraintTop_toTopOf="@id/HomeFragSearchText" />
+
+            <!--基金筛选图-->
+            <ImageView
+                android:id="@+id/HomeFragSelector"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginRight="@dimen/dp_14"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragSearchBg" />
+
+
+            <View
+                android:layout_width="@dimen/dp_4"
+                android:layout_height="@dimen/dp_14"
+                android:id="@+id/HomeFragChartLine"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/HomeFragChartTitle"
+                app:layout_constraintBottom_toBottomOf="@id/HomeFragChartTitle"
+                android:background="@color/main_blue"
+                android:layout_marginLeft="@dimen/dp_14"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/HomeFragChartTitle"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragChartLine"
+                app:layout_constraintTop_toBottomOf="@+id/HomeFragSelector"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/black_333"
+                android:text="@string/fund_300_compare"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_14"/>
+
+            <!--股票型Tag-->
+            <View
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_2"
+                android:id="@+id/HomeFragBlueStock"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragChartLine"
+                app:layout_constraintTop_toTopOf="@+id/HomeFragBlueStockTag"
+                app:layout_constraintBottom_toBottomOf="@+id/HomeFragBlueStockTag"
+                android:background="@color/main_blue" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/HomeFragBlueStockTag"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragBlueStock"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle"
+                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/main_blue"
+                android:text="@string/stock_type" />
+            <!--混合型Tag-->
+            <View
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_2"
+                android:id="@+id/HomeFragYellowMixed"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragBlueStockTag"
+                app:layout_constraintTop_toTopOf="@+id/HomeFragYellowMixedTag"
+                app:layout_constraintBottom_toBottomOf="@+id/HomeFragYellowMixedTag"
+                android:background="@color/yellow_FFCF00"
+                android:layout_marginLeft="@dimen/dp_14"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/HomeFragYellowMixedTag"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragYellowMixed"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle"
+                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/yellow_FFCF00"
+                android:text="@string/mix_type" />
+            <!--沪深300Tag-->
+            <View
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_2"
+                android:id="@+id/HomeFragRedHuShen"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragYellowMixedTag"
+                app:layout_constraintTop_toTopOf="@+id/HomeFragYellowMixedTag"
+                app:layout_constraintBottom_toBottomOf="@+id/HomeFragRedHuShenTag"
+                android:background="@color/red_FA1D05"
+                android:layout_marginLeft="@dimen/dp_14"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/HomeFragRedHuShenTag"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragRedHuShen"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle"
+                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/red_FA1D05"
+                android:text="@string/hs_300" />
+
+            <!--沪深300走势比较页集-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/HomeFragChartPager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragBlueStockTag"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:layout_marginRight="@dimen/dp_14"
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@color/white" />
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_44"
+                android:id="@+id/HomeFragChatTab"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/HomeFragTopCons"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragChartPager"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:layout_marginRight="@dimen/dp_14"
+                android:layout_marginBottom="@dimen/dp_14"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="auto"
+                app:tabMinWidth="@dimen/dp_60"
+                app:tabMaxWidth="@dimen/dp_80"
+                app:tabPaddingStart="@dimen/dp_4"
+                android:paddingEnd="@dimen/dp_4"
+                app:tabGravity="center"
+                app:tabRippleColor="@android:color/transparent"
+                android:overScrollMode="never"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <!--中部Tab-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HomeFragBtmCons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+            <!--一级Tab-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/HomeFragTopTab"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_44"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragBtmCons"
+                app:layout_constraintRight_toRightOf="@id/HomeFragBtmCons"
+                app:layout_constraintTop_toTopOf="@id/HomeFragBtmCons"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicator="@drawable/blue_line_tab_indicator"
+                app:tabIndicatorColor="@null"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabMinWidth="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/main_blue"
+                app:tabTextColor="@color/gray_666"
+                android:elevation="1dp"/>
+            <!--二级Tab-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/HomeFragSecondTab"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_44"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragBtmCons"
+                app:layout_constraintRight_toRightOf="@id/HomeFragBtmCons"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragTopTab"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicator="@drawable/blue_line_tab_indicator"
+                app:tabIndicatorColor="@null"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="0dp"
+                app:tabMinWidth="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/main_blue"
+                app:tabTextColor="@color/gray_666" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--表格-->
+    <com.bin.david.form.core.SmartTable
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/HomeFragSmartTable"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
