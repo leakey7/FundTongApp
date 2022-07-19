@@ -1,11 +1,16 @@
 package com.gzyslczx.ncfundscreenapp;
 
+import android.view.Gravity;
+import android.widget.PopupWindow;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
+import androidx.core.widget.PopupWindowCompat;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.gzyslczx.ncfundscreenapp.databinding.ActivityMainBinding;
+import com.gzyslczx.ncfundscreenapp.databinding.LoadingLayoutBinding;
 import com.gzyslczx.ncfundscreenapp.events.UpdateTokenEvent;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
 import com.gzyslczx.ncfundscreenapp.fragments.HomeFragment;
@@ -27,6 +32,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private MainActPresenter mPresenter;
     private WindowInsetsControllerCompat mWICCompact;
     private FragmentAdapter mFragmentAdapter;
+    private PopupWindow mLoadingView;
+
 
     @Override
     public void InitLayout() {
@@ -86,6 +93,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             mFragmentAdapter = new FragmentAdapter(this);
             mFragmentAdapter.setFragments(InitFragments());
             mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
+            LoadingLayoutBinding loadingLayoutBinding = LoadingLayoutBinding.bind(getLayoutInflater().inflate(R.layout.loading_layout, null));
+            mLoadingView = new PopupWindow(loadingLayoutBinding.getRoot(), 200, 200);
+            mLoadingView.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
         }
     }
 
@@ -98,5 +108,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         return fragments;
     }
 
+    /*
+    * 显示加载动画
+    * */
+    private void ShowLoading(){
+        if (mLoadingView!=null){
+            mLoadingView.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        }
+    }
+
+    /*
+    * 销毁加载动画
+    * */
+    private void DismissLoading(){
+        if (mLoadingView!=null){
+            mLoadingView.dismiss();
+        }
+    }
 
 }
