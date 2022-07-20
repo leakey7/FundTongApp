@@ -47,9 +47,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public void InitViews() {
-        mPresenter = new MainActPresenter();
+        //初始底部导航栏
         mViewBinding.MainBottom.setItemIconTintList(null);
         mViewBinding.MainBottom.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
+        //初始切页
+        mViewBinding.MainPagers.setUserInputEnabled(false);
+        mViewBinding.MainPagers.setOffscreenPageLimit(4);
+        mFragmentAdapter = new FragmentAdapter(this);
+        mFragmentAdapter.setFragments(InitFragments());
+        mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
+        //初始加载中试图
+        LoadingLayoutBinding loadingLayoutBinding = LoadingLayoutBinding.bind(getLayoutInflater().inflate(R.layout.loading_layout, null));
+        mLoadingView = new PopupWindow(loadingLayoutBinding.getRoot(), 200, 200);
+        mLoadingView.setOutsideTouchable(false);
     }
 
     @Override
@@ -67,6 +77,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void onResume() {
         super.onResume();
         if (!TokenTool.Instance().CheckTokenEffective()){
+            if (mPresenter==null){
+                mPresenter = new MainActPresenter();
+            }
             mPresenter.RequestUpdateToken(TAG, 0, this, null);
         }else {
             //无需更新Token
@@ -75,27 +88,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     }
 
     /*
-    * Token更新事件
-    * */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnUpdateTokenEvent(UpdateTokenEvent event){
-        if (event.isSuccess()){
-            //Token更新成功
-            Init();
-        }
-    }
-
-    /*
     * 初始化功能模块
     * */
     private void Init(){
-        if (mFragmentAdapter==null){
-            mFragmentAdapter = new FragmentAdapter(this);
-            mFragmentAdapter.setFragments(InitFragments());
-            mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
-            LoadingLayoutBinding loadingLayoutBinding = LoadingLayoutBinding.bind(getLayoutInflater().inflate(R.layout.loading_layout, null));
-            mLoadingView = new PopupWindow(loadingLayoutBinding.getRoot(), 200, 200);
-            mLoadingView.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        if (mPresenter==null){
+            mPresenter = new MainActPresenter();
         }
     }
 
@@ -123,6 +120,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private void DismissLoading(){
         if (mLoadingView!=null){
             mLoadingView.dismiss();
+        }
+    }
+
+
+    /*
+     * Token更新事件
+     * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnUpdateTokenEvent(UpdateTokenEvent event){
+        if (event.isSuccess()){
+            //Token更新成功
+            Init();
         }
     }
 

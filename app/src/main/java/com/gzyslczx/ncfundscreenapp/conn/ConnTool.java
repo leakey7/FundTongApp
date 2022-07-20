@@ -3,8 +3,13 @@ package com.gzyslczx.ncfundscreenapp.conn;
 import android.util.Log;
 
 import com.gzyslczx.ncfundscreenapp.BaseActivity;
+import com.gzyslczx.ncfundscreenapp.beans.request.ReqJustId;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResAdv;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResChartData;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResToken;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
+import com.gzyslczx.ncfundscreenapp.tools.SpTool;
+import com.gzyslczx.ncfundscreenapp.tools.SpUtils;
 import com.trello.rxlifecycle4.android.ActivityEvent;
 import com.trello.rxlifecycle4.android.FragmentEvent;
 
@@ -106,5 +111,39 @@ public class ConnTool {
         }
         return observable;
     }
+
+    /*
+    * 请求广告图
+    * flag：0=Activity 1=Fragment
+    * type: 1=首页基金筛选图 2=基金详情小图标
+    * */
+    public Observable<ResAdv> ReqFundTongAdvList(String TAG, int flag, BaseActivity baseActivity, BaseFragment baseFragment, int type){
+        ReqJustId reqJustId = new ReqJustId(type);
+        Observable<ResAdv> observable = mConnInter.ReqFundTongAdvList(ConnPath.HeaderBearer + SpTool.GetInfo(SpUtils.SpToken),
+                reqJustId);
+        observable = AddRetryReq(observable, TAG);
+        if (flag==0) {
+            observable = AddExtraReqOfAct(observable, TAG, baseActivity);
+        }else {
+            observable =  AddExtraReqOfFrag(observable, TAG, baseFragment);
+        }
+        return observable;
+    }
+
+    /*
+     * 请求股票、混合和沪深三百对比数据
+     * flag:0=Activity 1=Fragment
+     * */
+    public Observable<ResChartData> ReqFundTongChart(String TAG, int flag, BaseActivity baseActivity, BaseFragment baseFragment){
+        Observable<ResChartData> observable = mConnInter.ReqFundTongChartData(ConnPath.HeaderBearer + SpTool.GetInfo(SpUtils.SpToken));
+        observable = AddRetryReq(observable, TAG);
+        if (flag==0) {
+            observable = AddExtraReqOfAct(observable, TAG, baseActivity);
+        }else {
+            observable =  AddExtraReqOfFrag(observable, TAG, baseFragment);
+        }
+        return observable;
+    }
+
 
 }
