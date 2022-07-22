@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mViewBinding.MainPagers.setOffscreenPageLimit(4);
         mFragmentAdapter = new FragmentAdapter(this);
         mFragmentAdapter.setFragments(InitFragments());
-        mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
         //初始加载中试图
         LoadingLayoutBinding loadingLayoutBinding = LoadingLayoutBinding.bind(getLayoutInflater().inflate(R.layout.loading_layout, null));
         mLoadingView = new PopupWindow(loadingLayoutBinding.getRoot(), 200, 200);
@@ -93,6 +92,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private void Init(){
         if (mPresenter==null){
             mPresenter = new MainActPresenter();
+            mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
         }
     }
 
