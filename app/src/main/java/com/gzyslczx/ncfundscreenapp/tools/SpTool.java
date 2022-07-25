@@ -50,7 +50,7 @@ public class SpTool {
         if (mSharedPreferences!=null){
             String result = mSharedPreferences.getString(key, SpUtils.SpDef);
             if (result.equals(SpUtils.SpDef)){
-                Log.e(SpUtils.TAG, "获取失败，信息不存在");
+                Log.d(SpUtils.TAG, "获取失败，信息不存在");
                 return null;
             }
             return result;

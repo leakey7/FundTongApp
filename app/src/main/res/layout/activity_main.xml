@@ -29,7 +29,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_btm_bar_menu"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 
     <!--页面集-->
     <androidx.viewpager2.widget.ViewPager2
@@ -41,6 +41,6 @@
         app:layout_constraintTop_toBottomOf="@id/MainHead"
         app:layout_constraintBottom_toTopOf="@id/MainBottom"
         android:overScrollMode="never"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

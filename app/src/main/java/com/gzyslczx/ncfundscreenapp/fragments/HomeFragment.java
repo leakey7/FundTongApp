@@ -17,6 +17,8 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.gzyslczx.ncfundscreenapp.R;
 import com.gzyslczx.ncfundscreenapp.databinding.HomeFragmentBinding;
 import com.gzyslczx.ncfundscreenapp.events.AdvEvent;
@@ -32,6 +34,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     private final String TAG = "HomeFrag";
     private HomeFragPres mPresenter;
     private FragmentAdapter mChatAdapter;
+    private TabLayoutMediator mTabLayoutMediator;
+    private final String[] ChartTabs = new String[]{"1个月", "3个月", "6个月", "1年", "2年", "3年", "5年"};
 
     @Override
     public View InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +44,13 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         mChatAdapter = new FragmentAdapter(this);
         //基金筛选点击
         mViewBinding.HomeFragSelector.setOnClickListener(this::onClick);
+        //股票、混合、沪深三百
+        mTabLayoutMediator = new TabLayoutMediator(mViewBinding.HomeFragChatTab, mViewBinding.HomeFragChartPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+
+            }
+        });
         EventBus.getDefault().register(this);
         return mViewBinding.getRoot();
     }
@@ -88,6 +99,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                 mViewBinding.HomeFragSelector.setTag("ERROR");
+                                mPresenter.RequestFundSelectPic(TAG, HomeFragment.this);
                                 return false;
                             }
 
@@ -107,11 +119,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         switch (v.getId()){
             case R.id.HomeFragSelector:
                 if (mViewBinding.HomeFragSelector.getTag()!=null) {
-                    if ("error".equals(mViewBinding.HomeFragSelector.getTag().toString())) {
-                        mViewBinding.HomeFragSelector.setImageDrawable(null);
-                        mPresenter.RequestFundSelectPic(TAG, this);
-                        Log.d(TAG, "跳转基金筛选无点击地址");
-                    } else {
+                    if (!"error".equals(mViewBinding.HomeFragSelector.getTag().toString())) {
                         Log.d(TAG, String.format("跳转基金筛选：%s", mViewBinding.HomeFragSelector.getTag().toString()));
                     }
                 }else {

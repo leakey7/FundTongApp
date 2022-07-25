@@ -28,6 +28,13 @@ android {
     buildFeatures{
         viewBinding = true
     }
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.gzyslczx.ncfundscreenapp.MyEventBusIndex' ]
+            }
+        }
+    }
 }
 
 dependencies {

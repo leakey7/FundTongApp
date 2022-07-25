@@ -44,6 +44,9 @@ public class HomeFragPres extends BasePresenter{
         });
     }
 
+    /*
+    * 请求
+    * */
 
 
 

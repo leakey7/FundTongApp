@@ -1,12 +1,13 @@
 package com.gzyslczx.ncfundscreenapp;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
-import androidx.core.widget.PopupWindowCompat;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.gzyslczx.ncfundscreenapp.databinding.ActivityMainBinding;
@@ -79,6 +80,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             if (mPresenter==null){
                 mPresenter = new MainActPresenter();
             }
+            Log.d(TAG, "更新Token");
             mPresenter.RequestUpdateToken(TAG, 0, this, null);
         }else {
             //无需更新Token
@@ -90,10 +92,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     * 初始化功能模块
     * */
     private void Init(){
-        if (mPresenter==null){
-            mPresenter = new MainActPresenter();
-            mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
-        }
+        mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
     }
 
     /*
@@ -131,7 +130,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public void OnUpdateTokenEvent(UpdateTokenEvent event){
         if (event.isSuccess()){
             //Token更新成功
+            Log.d(TAG, "更新Token成功");
             Init();
+        }else {
+            Log.d(TAG, "更新Token失败");
+            Toast.makeText(this, "无法获取权限", Toast.LENGTH_SHORT).show();
         }
     }
 
