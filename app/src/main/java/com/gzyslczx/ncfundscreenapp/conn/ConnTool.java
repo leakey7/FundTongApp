@@ -6,6 +6,7 @@ import com.gzyslczx.ncfundscreenapp.BaseActivity;
 import com.gzyslczx.ncfundscreenapp.beans.request.ReqJustId;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResAdv;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResChartData;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResIcon;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResToken;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
 import com.gzyslczx.ncfundscreenapp.tools.SpTool;
@@ -145,5 +146,18 @@ public class ConnTool {
         return observable;
     }
 
+    /*
+    * 请求图标Tab
+    * */
+    public Observable<ResIcon> RequestFundTongTab(String TAG, int flag, BaseActivity baseActivity, BaseFragment baseFragment){
+        Observable<ResIcon> observable = mConnInter.ReqFundTongTabIcon(ConnPath.HeaderBearer + SpTool.GetInfo(SpUtils.SpToken));
+        observable = AddRetryReq(observable, TAG);
+        if (flag==0) {
+            observable = AddExtraReqOfAct(observable, TAG, baseActivity);
+        }else {
+            observable =  AddExtraReqOfFrag(observable, TAG, baseFragment);
+        }
+        return observable;
+    }
 
 }

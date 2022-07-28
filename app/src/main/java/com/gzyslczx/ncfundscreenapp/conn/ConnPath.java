@@ -17,5 +17,7 @@ public class ConnPath {
     public static final String FTAdvUrl = "api/UserInfo/GetAdvertInfoList";
     //股票型、混合型、沪深三百地址
     public static final String FTChartUrl = "api/UserInfo/GetFundImgInfo";
+    //图标Tab
+    public static final String FTTabUrl = "api/UserInfo/GetAdvInfoList";
 
 }
