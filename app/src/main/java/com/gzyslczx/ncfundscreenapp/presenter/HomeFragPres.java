@@ -2,11 +2,13 @@ package com.gzyslczx.ncfundscreenapp.presenter;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResAdv;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResChartData;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIcon;
 import com.gzyslczx.ncfundscreenapp.conn.ConnTool;
 import com.gzyslczx.ncfundscreenapp.events.AdvEvent;
+import com.gzyslczx.ncfundscreenapp.events.IconTabEvent;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -54,16 +56,17 @@ public class HomeFragPres extends BasePresenter{
             @Override
             public void accept(ResIcon resIcon) throws Throwable {
                 if (resIcon.isSuccess()){
-                    Log.d(TAG, String.format("图标Tab请求成功:%s", resIcon.getMessage()));
-
+                    Log.d(TAG, String.format("图标Tab请求成功:%s", new Gson().toJson(resIcon.getResultObj())));
+                    EventBus.getDefault().post(new IconTabEvent(true, resIcon.getResultObj()));
                 }else {
                     Log.d(TAG, String.format("图标Tab请求失败:%s", resIcon.getMessage()));
+                    EventBus.getDefault().post(new IconTabEvent(false, null));
                 }
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Throwable {
-                Log.d(TAG, String.format("图标Tab请求错误:%s", throwable.getMessage()));
+                Log.e(TAG, String.format("图标Tab请求错误:%s", throwable.getMessage()));
             }
         });
     }

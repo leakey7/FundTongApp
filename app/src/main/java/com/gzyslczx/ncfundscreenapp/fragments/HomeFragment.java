@@ -20,14 +20,19 @@ import com.bumptech.glide.request.target.Target;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.gzyslczx.ncfundscreenapp.R;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResIconObj;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResIconType;
 import com.gzyslczx.ncfundscreenapp.databinding.HomeFragmentBinding;
 import com.gzyslczx.ncfundscreenapp.events.AdvEvent;
+import com.gzyslczx.ncfundscreenapp.events.IconTabEvent;
 import com.gzyslczx.ncfundscreenapp.presenter.HomeFragPres;
 import com.gzyslczx.ncfundscreenapp.tools.FragmentAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements View.OnClickListener {
 
@@ -36,6 +41,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     private FragmentAdapter mChatAdapter;
     private TabLayoutMediator mTabLayoutMediator;
     private final String[] ChartTabs = new String[]{"1个月", "3个月", "6个月", "1年", "2年", "3年", "5年"};
+    private List<ResIconObj> mIconTabList;
+    private int mTabId, mTypeId;
 
     @Override
     public View InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +58,10 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
 
             }
         });
+        //Tab点击事件
+        OnClickedIconTab();
+        OnClickedSecondTab();
+        //注册EventBus
         EventBus.getDefault().register(this);
         return mViewBinding.getRoot();
     }
@@ -73,6 +84,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        //注销EventBus
         EventBus.getDefault().unregister(this);
     }
 
@@ -82,7 +94,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     private void Init(){
         //请求基金筛选
         mPresenter.RequestFundSelectPic(TAG, this);
-        //
+        //请求IconTab
+        mPresenter.RequestTab(TAG, this);
     }
 
     /*
@@ -99,7 +112,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                 mViewBinding.HomeFragSelector.setTag("ERROR");
-                                mPresenter.RequestFundSelectPic(TAG, HomeFragment.this);
                                 return false;
                             }
 
@@ -114,12 +126,27 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         }
     }
 
+    /*
+    * 基金IconTab
+    * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnFundIconTabEvent(IconTabEvent event){
+        if (event.isSuccess()){
+            mIconTabList = event.getIconTabObj();
+            InitIconTab();
+        }else {
+
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.HomeFragSelector:
                 if (mViewBinding.HomeFragSelector.getTag()!=null) {
-                    if (!"error".equals(mViewBinding.HomeFragSelector.getTag().toString())) {
+                    if ("ERROR".equals(mViewBinding.HomeFragSelector.getTag().toString())) {
+                        mPresenter.RequestFundSelectPic(TAG, HomeFragment.this);
+                    }else {
                         Log.d(TAG, String.format("跳转基金筛选：%s", mViewBinding.HomeFragSelector.getTag().toString()));
                     }
                 }else {
@@ -128,4 +155,90 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                 break;
         }
     }
+
+    /*
+    * 初始化IconTab
+    * */
+    private void InitIconTab(){
+        if (mIconTabList!=null && mIconTabList.size()>0){
+            Log.d(TAG, "初始化IconTab");
+            mViewBinding.HomeFragTopTab.removeAllTabs();
+            for (ResIconObj iconObj : mIconTabList){
+                TabLayout.Tab tab = mViewBinding.HomeFragTopTab.newTab();
+                tab.setText(iconObj.getTitle());
+                mViewBinding.HomeFragTopTab.addTab(tab);
+            }
+            mViewBinding.HomeFragTopTab.selectTab(mViewBinding.HomeFragTopTab.getTabAt(0));
+            InitSecondTab(mIconTabList.get(0).getTList());
+            mTabId = 0;
+        }
+    }
+    /*
+    * 初始化二级Tab
+    * */
+    private void InitSecondTab(List<ResIconType> iconTypeList){
+        if (iconTypeList!=null && iconTypeList.size()>0){
+            mViewBinding.HomeFragSecondTab.removeAllTabs();
+            for (ResIconType iconType : iconTypeList){
+                TabLayout.Tab tab = mViewBinding.HomeFragSecondTab.newTab();
+                tab.setText(iconType.getTypeName());
+                mViewBinding.HomeFragSecondTab.addTab(tab);
+            }
+            mViewBinding.HomeFragSecondTab.selectTab(mViewBinding.HomeFragSecondTab.getTabAt(0));
+            mTypeId = 0;
+        }
+    }
+    /*
+    * IconTab点击事件
+    * */
+    private void OnClickedIconTab(){
+        mViewBinding.HomeFragTopTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //获取选择的IconTabID
+                int select = mViewBinding.HomeFragTopTab.getSelectedTabPosition();
+                Log.d(TAG, String.format("IconTab=%d", select));
+                mTabId = mIconTabList.get(select).getAdId();
+                //更新二级Tab
+                InitSecondTab(mIconTabList.get(select).getTList());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+    /*
+    * 二级Tab点击事件
+    * */
+    private void OnClickedSecondTab(){
+        mViewBinding.HomeFragSecondTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //获取选择的二级TabID
+                int select = mViewBinding.HomeFragSecondTab.getSelectedTabPosition();
+                Log.d(TAG, String.format("二级Tab=%d", select));
+                mTypeId = mIconTabList.get(mViewBinding.HomeFragTopTab.getSelectedTabPosition()).getTList().get(select).getTId();
+                //更新排行榜
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
 }
