@@ -9,4 +9,12 @@
     <string name="stock_type">股票型</string>
     <string name="mix_type">混合型</string>
     <string name="hs_300">沪深300</string>
+    <string name="name_code">名称代码</string>
+    <string name="daily_gains">日涨幅</string>
+    <string name="week_gains">周涨幅</string>
+    <string name="month_gains">月涨幅</string>
+    <string name="quarter_gains">季度涨幅</string>
+    <string name="half_year_gains">半年涨幅</string>
+    <string name="year_gains">年涨幅</string>
+    <string name="fund_mode">基金规模</string>
 </resources>

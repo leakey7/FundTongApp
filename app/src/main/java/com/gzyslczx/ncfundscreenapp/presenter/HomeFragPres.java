@@ -3,11 +3,14 @@ package com.gzyslczx.ncfundscreenapp.presenter;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.gzyslczx.ncfundscreenapp.beans.request.ReqMainRank;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResAdv;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResChartData;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIcon;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResMainRank;
 import com.gzyslczx.ncfundscreenapp.conn.ConnTool;
 import com.gzyslczx.ncfundscreenapp.events.AdvEvent;
+import com.gzyslczx.ncfundscreenapp.events.HomeRankEvent;
 import com.gzyslczx.ncfundscreenapp.events.IconTabEvent;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
 
@@ -71,6 +74,28 @@ public class HomeFragPres extends BasePresenter{
         });
     }
 
-
+    /*
+    * 请求首页排行榜
+    * */
+    public void RequestHomeRank(String TAG, BaseFragment baseFragment, int iconID, int typeID, int currentPage, int sort){
+        ReqMainRank reqMainRank = new ReqMainRank(iconID, typeID, currentPage, 6, 0);
+        Observable<ResMainRank> observable = ConnTool.Instance().RequestMainRank(TAG, 1, null, baseFragment, reqMainRank);
+        observable.subscribe(new Consumer<ResMainRank>() {
+            @Override
+            public void accept(ResMainRank resMainRank) throws Throwable {
+                if (resMainRank.isSuccess()){
+                    EventBus.getDefault().post(new HomeRankEvent(true, resMainRank.getResultObj()));
+                }else {
+                    Log.d(TAG, String.format("首页排行榜请求失败:%s", resMainRank.getMessage()));
+                    EventBus.getDefault().post(new HomeRankEvent(false, null));
+                }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Throwable {
+                Log.e(TAG, String.format("首页排行榜请求失败:%s", throwable.getMessage()));
+            }
+        });
+    }
 
 }

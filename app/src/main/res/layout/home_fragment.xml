@@ -246,15 +246,176 @@
                 app:tabSelectedTextColor="@color/main_blue"
                 app:tabTextColor="@color/gray_666" />
 
+            <!--名称代码-->
+            <TextView
+                android:layout_width="@dimen/dp_98"
+                android:layout_height="@dimen/dp_38"
+                android:id="@+id/HeadLeftText"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragSecondTab"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragSecondTab"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/black_333"
+                android:gravity="center"
+                android:text="@string/name_code"
+                android:background="@drawable/gray_side"/>
+            <ImageView
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="wrap_content"
+                android:id="@+id/HeadLeftSortImg"
+                app:layout_constraintRight_toRightOf="@id/HeadLeftText"
+                app:layout_constraintTop_toTopOf="@id/HeadLeftText"
+                app:layout_constraintBottom_toBottomOf="@id/HeadLeftText"
+                android:layout_marginRight="@dimen/dp_4"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/da_xiao"/>
+            <!--右部列表滑动-->
+            <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_38"
+                android:id="@+id/HeadRightScroll"
+                app:layout_constraintLeft_toRightOf="@id/HeadLeftText"
+                app:layout_constraintTop_toTopOf="@id/HeadLeftText"
+                app:layout_constraintBottom_toBottomOf="@id/HeadLeftText"
+                app:layout_constraintRight_toRightOf="parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/HeadRightCons">
+                    <!--日涨幅-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/DailyGains"
+                        app:layout_constraintLeft_toLeftOf="@id/HeadRightCons"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/daily_gains"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                    <!--周涨幅-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/WeekGains"
+                        app:layout_constraintLeft_toRightOf="@id/DailyGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/week_gains"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                    <!--月涨幅-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/MonthGains"
+                        app:layout_constraintLeft_toRightOf="@id/WeekGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/month_gains"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                    <!--季度涨幅-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/QuarterGains"
+                        app:layout_constraintLeft_toRightOf="@id/MonthGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/quarter_gains"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                    <!--半年涨幅-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/HalfYearGains"
+                        app:layout_constraintLeft_toRightOf="@id/QuarterGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/half_year_gains"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                    <!--年涨幅-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/YearGains"
+                        app:layout_constraintLeft_toRightOf="@id/HalfYearGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/year_gains"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                    <!--基金规模-->
+                    <TextView
+                        android:layout_width="@dimen/dp_88"
+                        android:layout_height="@dimen/dp_38"
+                        android:id="@+id/FundMode"
+                        app:layout_constraintLeft_toRightOf="@id/YearGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        android:text="@string/fund_mode"
+                        android:gravity="center"
+                        android:textColor="@color/black_333"
+                        android:textSize="@dimen/sp_14"
+                        android:background="@drawable/gray_side"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--表格-->
-    <com.bin.david.form.core.SmartTable
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeFragListCons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/HomeFragSmartTable"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/HomeFragLeftList"
+            android:layout_width="@dimen/dp_98"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="@id/HomeFragListCons"
+            app:layout_constraintLeft_toLeftOf="@id/HomeFragListCons"
+            app:layout_constraintTop_toTopOf="@id/HomeFragListCons" />
+
+        <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
+            android:id="@+id/HomeFragScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@id/HomeFragLeftList"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/HomeFragLeftList"
+            app:layout_constraintRight_toRightOf="@id/HomeFragListCons"
+            app:layout_constraintTop_toTopOf="@+id/HomeFragLeftList">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/HomeFragRightList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

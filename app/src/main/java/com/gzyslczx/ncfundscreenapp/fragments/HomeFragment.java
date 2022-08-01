@@ -24,6 +24,7 @@ import com.gzyslczx.ncfundscreenapp.beans.response.ResIconObj;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIconType;
 import com.gzyslczx.ncfundscreenapp.databinding.HomeFragmentBinding;
 import com.gzyslczx.ncfundscreenapp.events.AdvEvent;
+import com.gzyslczx.ncfundscreenapp.events.HomeRankEvent;
 import com.gzyslczx.ncfundscreenapp.events.IconTabEvent;
 import com.gzyslczx.ncfundscreenapp.presenter.HomeFragPres;
 import com.gzyslczx.ncfundscreenapp.tools.FragmentAdapter;
@@ -42,7 +43,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     private TabLayoutMediator mTabLayoutMediator;
     private final String[] ChartTabs = new String[]{"1个月", "3个月", "6个月", "1年", "2年", "3年", "5年"};
     private List<ResIconObj> mIconTabList;
-    private int mTabId, mTypeId;
+    private int mTabId, mTypeId, mNextPage =1;
 
     @Override
     public View InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -135,7 +136,27 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
             mIconTabList = event.getIconTabObj();
             InitIconTab();
         }else {
+            mPresenter.RequestTab(TAG, this);
+        }
+    }
 
+    /*
+    * 基金排行榜
+    * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnFundRankEvent(HomeRankEvent event){
+        if (event.isSuccess()){
+            //请求成功
+            if (mNextPage <event.getResMainRankObj().getPageCount()){
+                mNextPage++;
+                //未到尾页
+            }else {
+                //已到尾页
+            }
+            //添加数据表
+
+        }else {
+            //请求失败
         }
     }
 
@@ -145,8 +166,10 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
             case R.id.HomeFragSelector:
                 if (mViewBinding.HomeFragSelector.getTag()!=null) {
                     if ("ERROR".equals(mViewBinding.HomeFragSelector.getTag().toString())) {
+                        //基金筛选图加载失败，重请求
                         mPresenter.RequestFundSelectPic(TAG, HomeFragment.this);
                     }else {
+                        //跳转基金筛选Web
                         Log.d(TAG, String.format("跳转基金筛选：%s", mViewBinding.HomeFragSelector.getTag().toString()));
                     }
                 }else {
@@ -226,7 +249,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                 Log.d(TAG, String.format("二级Tab=%d", select));
                 mTypeId = mIconTabList.get(mViewBinding.HomeFragTopTab.getSelectedTabPosition()).getTList().get(select).getTId();
                 //更新排行榜
-
+                mNextPage=1;
+                UpdateHomeRank(1);
             }
 
             @Override
@@ -240,5 +264,13 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
             }
         });
     }
+
+    /*
+    * 更新排行榜
+    * */
+    private void UpdateHomeRank(int sort){
+        mPresenter.RequestHomeRank(TAG, this, mTabId, mTypeId, mNextPage, sort);
+    }
+
 
 }

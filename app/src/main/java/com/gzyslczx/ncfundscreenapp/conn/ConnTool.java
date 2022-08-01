@@ -4,9 +4,11 @@ import android.util.Log;
 
 import com.gzyslczx.ncfundscreenapp.BaseActivity;
 import com.gzyslczx.ncfundscreenapp.beans.request.ReqJustId;
+import com.gzyslczx.ncfundscreenapp.beans.request.ReqMainRank;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResAdv;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResChartData;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIcon;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResMainRank;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResToken;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
 import com.gzyslczx.ncfundscreenapp.tools.SpTool;
@@ -151,6 +153,21 @@ public class ConnTool {
     * */
     public Observable<ResIcon> RequestFundTongTab(String TAG, int flag, BaseActivity baseActivity, BaseFragment baseFragment){
         Observable<ResIcon> observable = mConnInter.ReqFundTongTabIcon(ConnPath.HeaderBearer + SpTool.GetInfo(SpUtils.SpToken));
+        observable = AddRetryReq(observable, TAG);
+        if (flag==0) {
+            observable = AddExtraReqOfAct(observable, TAG, baseActivity);
+        }else {
+            observable =  AddExtraReqOfFrag(observable, TAG, baseFragment);
+        }
+        return observable;
+    }
+
+    /*
+    * 请求首页排行榜
+    * */
+    public Observable<ResMainRank> RequestMainRank(String TAG, int flag, BaseActivity baseActivity, BaseFragment baseFragment, ReqMainRank req){
+        Observable<ResMainRank> observable = mConnInter.ReqFundTongMainRank(ConnPath.HeaderBearer + SpTool.GetInfo(SpUtils.SpToken),
+                req);
         observable = AddRetryReq(observable, TAG);
         if (flag==0) {
             observable = AddExtraReqOfAct(observable, TAG, baseActivity);
