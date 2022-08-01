@@ -1,9 +1,11 @@
 package com.gzyslczx.ncfundscreenapp.conn;
 
 import com.gzyslczx.ncfundscreenapp.beans.request.ReqJustId;
+import com.gzyslczx.ncfundscreenapp.beans.request.ReqMainRank;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResAdv;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResChartData;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIcon;
+import com.gzyslczx.ncfundscreenapp.beans.response.ResMainRank;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResToken;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -29,5 +31,9 @@ public interface ConnInter {
     //基金通图标Tab
     @POST(ConnPath.FTTabUrl)
     Observable<ResIcon> ReqFundTongTabIcon(@Header(ConnPath.HEAD) String header);
+
+    //基金通首页排行榜
+    @POST(ConnPath.FTMainRank)
+    Observable<ResMainRank> ReqFundTongMainRank(@Header(ConnPath.HEAD) String header, @Body ReqMainRank req);
 
 }

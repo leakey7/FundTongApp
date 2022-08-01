@@ -19,5 +19,7 @@ public class ConnPath {
     public static final String FTChartUrl = "api/UserInfo/GetFundImgInfo";
     //图标Tab
     public static final String FTTabUrl = "api/UserInfo/GetAdvInfoList";
+    //首页排行榜
+    public static final String FTMainRank = "api/UserInfo/GetFundPhbPage";
 
 }
