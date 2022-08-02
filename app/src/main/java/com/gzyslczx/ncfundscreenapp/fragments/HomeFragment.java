@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -20,6 +21,8 @@ import com.bumptech.glide.request.target.Target;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.gzyslczx.ncfundscreenapp.R;
+import com.gzyslczx.ncfundscreenapp.adapters.HomeRankLeftAdapter;
+import com.gzyslczx.ncfundscreenapp.adapters.HomeRankRightAdapter;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIconObj;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResIconType;
 import com.gzyslczx.ncfundscreenapp.databinding.HomeFragmentBinding;
@@ -44,6 +47,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     private final String[] ChartTabs = new String[]{"1个月", "3个月", "6个月", "1年", "2年", "3年", "5年"};
     private List<ResIconObj> mIconTabList;
     private int mTabId, mTypeId, mNextPage =1;
+    private HomeRankLeftAdapter mRankLeftAdapter;
+    private HomeRankRightAdapter mRankRightAdapter;
 
     @Override
     public View InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,6 +67,15 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         //Tab点击事件
         OnClickedIconTab();
         OnClickedSecondTab();
+        //排行榜排序点击
+        mViewBinding.HeadLeftSortImg.setOnClickListener(this::onClick);
+        //排行榜列表适配
+        mRankLeftAdapter = new HomeRankLeftAdapter(R.layout.home_rank_left_item);
+        mViewBinding.HomeFragLeftList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mViewBinding.HomeFragLeftList.setAdapter(mRankLeftAdapter);
+        mRankRightAdapter = new HomeRankRightAdapter(R.layout.home_rank_right_item);
+        mViewBinding.HomeFragRightList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mViewBinding.HomeFragRightList.setAdapter(mRankRightAdapter);
         //注册EventBus
         EventBus.getDefault().register(this);
         return mViewBinding.getRoot();
@@ -154,7 +168,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                 //已到尾页
             }
             //添加数据表
-
+            mRankLeftAdapter.addData(event.getResMainRankObj().getPageInfo());
+            mRankRightAdapter.addData(event.getResMainRankObj().getPageInfo());
         }else {
             //请求失败
         }
@@ -176,6 +191,22 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                     Log.d(TAG, "跳转基金筛选无点击地址");
                 }
                 break;
+            case R.id.HeadLeftSortImg:
+                if (mViewBinding.HeadLeftSortImg.getTag().toString().equals("1")){
+                    //升序排序
+                    mNextPage=1;
+                    mRankLeftAdapter.setList(null);
+                    mRankRightAdapter.setList(null);
+                    UpdateHomeRank(0);
+                }else if (mViewBinding.HeadLeftSortImg.getTag().toString().equals("0")){
+                    //降序排序
+                    mNextPage=1;
+                    mRankLeftAdapter.setList(null);
+                    mRankRightAdapter.setList(null);
+                    UpdateHomeRank(1);
+                }
+
+                break;
         }
     }
 
@@ -192,8 +223,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                 mViewBinding.HomeFragTopTab.addTab(tab);
             }
             mViewBinding.HomeFragTopTab.selectTab(mViewBinding.HomeFragTopTab.getTabAt(0));
-            InitSecondTab(mIconTabList.get(0).getTList());
-            mTabId = 0;
         }
     }
     /*
@@ -208,7 +237,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                 mViewBinding.HomeFragSecondTab.addTab(tab);
             }
             mViewBinding.HomeFragSecondTab.selectTab(mViewBinding.HomeFragSecondTab.getTabAt(0));
-            mTypeId = 0;
         }
     }
     /*
@@ -220,8 +248,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
             public void onTabSelected(TabLayout.Tab tab) {
                 //获取选择的IconTabID
                 int select = mViewBinding.HomeFragTopTab.getSelectedTabPosition();
-                Log.d(TAG, String.format("IconTab=%d", select));
                 mTabId = mIconTabList.get(select).getAdId();
+                Log.d(TAG, String.format("一级Tab=%d", mTabId));
                 //更新二级Tab
                 InitSecondTab(mIconTabList.get(select).getTList());
             }
@@ -246,10 +274,12 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
             public void onTabSelected(TabLayout.Tab tab) {
                 //获取选择的二级TabID
                 int select = mViewBinding.HomeFragSecondTab.getSelectedTabPosition();
-                Log.d(TAG, String.format("二级Tab=%d", select));
                 mTypeId = mIconTabList.get(mViewBinding.HomeFragTopTab.getSelectedTabPosition()).getTList().get(select).getTId();
+                Log.d(TAG, String.format("二级Tab=%d", mTypeId));
                 //更新排行榜
                 mNextPage=1;
+                mRankLeftAdapter.setList(null);
+                mRankRightAdapter.setList(null);
                 UpdateHomeRank(1);
             }
 
@@ -270,6 +300,16 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     * */
     private void UpdateHomeRank(int sort){
         mPresenter.RequestHomeRank(TAG, this, mTabId, mTypeId, mNextPage, sort);
+        //更换排序图
+        if (sort==1 && mViewBinding.HeadLeftSortImg.getTag().toString().equals("0")){
+            Glide.with(getContext()).load(ContextCompat.getDrawable(getContext(), R.drawable.da_xiao)).fitCenter()
+                    .into(mViewBinding.HeadLeftSortImg);
+            mViewBinding.HeadLeftSortImg.setTag("1");
+        }else if (sort==0 && mViewBinding.HeadLeftSortImg.getTag().toString().equals("1")){
+            Glide.with(getContext()).load(ContextCompat.getDrawable(getContext(), R.drawable.xiao_da)).fitCenter()
+                    .into(mViewBinding.HeadLeftSortImg);
+            mViewBinding.HeadLeftSortImg.setTag("0");
+        }
     }
 
 

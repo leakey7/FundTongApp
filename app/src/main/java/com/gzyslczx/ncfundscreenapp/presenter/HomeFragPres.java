@@ -78,7 +78,7 @@ public class HomeFragPres extends BasePresenter{
     * 请求首页排行榜
     * */
     public void RequestHomeRank(String TAG, BaseFragment baseFragment, int iconID, int typeID, int currentPage, int sort){
-        ReqMainRank reqMainRank = new ReqMainRank(iconID, typeID, currentPage, 6, 0);
+        ReqMainRank reqMainRank = new ReqMainRank(iconID, typeID, currentPage, 6, sort);
         Observable<ResMainRank> observable = ConnTool.Instance().RequestMainRank(TAG, 1, null, baseFragment, reqMainRank);
         observable.subscribe(new Consumer<ResMainRank>() {
             @Override

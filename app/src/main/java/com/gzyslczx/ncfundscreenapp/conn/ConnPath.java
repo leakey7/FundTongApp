@@ -20,6 +20,6 @@ public class ConnPath {
     //图标Tab
     public static final String FTTabUrl = "api/UserInfo/GetAdvInfoList";
     //首页排行榜
-    public static final String FTMainRank = "api/UserInfo/GetFundPhbPage";
+    public static final String FTMainRank = "api/UserInfo/GetFundPhbPages";
 
 }

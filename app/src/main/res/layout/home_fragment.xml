@@ -268,7 +268,8 @@
                 android:layout_marginRight="@dimen/dp_4"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/da_xiao"/>
+                android:src="@drawable/da_xiao"
+                android:tag="1"/>
             <!--右部列表滑动-->
             <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
                 android:layout_width="0dp"
