@@ -76,6 +76,9 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         mRankRightAdapter = new HomeRankRightAdapter(R.layout.home_rank_right_item);
         mViewBinding.HomeFragRightList.setLayoutManager(new LinearLayoutManager(getContext()));
         mViewBinding.HomeFragRightList.setAdapter(mRankRightAdapter);
+        //排行榜列表右滑联动
+        mViewBinding.HeadRightScroll.setSubScroll(mViewBinding.HomeFragScroll);
+        mViewBinding.HomeFragScroll.setSubScroll(mViewBinding.HeadRightScroll);
         //注册EventBus
         EventBus.getDefault().register(this);
         return mViewBinding.getRoot();

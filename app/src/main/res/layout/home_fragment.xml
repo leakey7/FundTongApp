@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/HomeFragAppBar"
@@ -17,185 +17,191 @@
             app:contentScrim="@android:color/transparent"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/HomeFragTopCons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/gray_f7"
-            app:layout_collapseMode="parallax"
-            app:layout_collapseParallaxMultiplier="0">
-
-            <View
-                android:id="@+id/HomeFragSearchBg"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_44"
-                android:background="@color/main_blue"
-                app:layout_constraintLeft_toLeftOf="@id/HomeFragTopCons"
-                app:layout_constraintRight_toRightOf="@id/HomeFragTopCons"
-                app:layout_constraintTop_toTopOf="@id/HomeFragTopCons" />
-
-            <!--搜索点击栏-->
-            <TextView
-                android:id="@+id/HomeFragSearchText"
-                android:layout_width="0dp"
-                android:layout_height="26dp"
-                android:layout_marginLeft="@dimen/dp_14"
-                android:layout_marginRight="@dimen/dp_14"
-                android:background="@drawable/white_radius_10_shape"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/dp_44"
-                android:text="@string/search_fund"
-                android:textColor="@color/black_333"
-                android:textSize="@dimen/sp_14"
-                app:layout_constraintBottom_toBottomOf="@id/HomeFragSearchBg"
-                app:layout_constraintLeft_toLeftOf="@id/HomeFragSearchBg"
-                app:layout_constraintRight_toRightOf="@id/HomeFragSearchBg"
-                app:layout_constraintTop_toTopOf="@id/HomeFragSearchBg" />
-            <ImageView
-                android:id="@+id/HomeFragSearchImg"
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="@dimen/dp_16"
-                android:layout_marginLeft="@dimen/dp_14"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:src="@drawable/black_search"
-                app:layout_constraintBottom_toBottomOf="@id/HomeFragSearchText"
-                app:layout_constraintLeft_toLeftOf="@id/HomeFragSearchText"
-                app:layout_constraintTop_toTopOf="@id/HomeFragSearchText" />
-
-            <!--基金筛选图-->
-            <ImageView
-                android:id="@+id/HomeFragSelector"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/HomeFragTopCons"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="@dimen/dp_14"
-                android:layout_marginRight="@dimen/dp_14"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragSearchBg" />
+                android:background="@color/gray_f7"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0">
+
+                <View
+                    android:id="@+id/HomeFragSearchBg"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_44"
+                    android:background="@color/main_blue"
+                    app:layout_constraintLeft_toLeftOf="@id/HomeFragTopCons"
+                    app:layout_constraintRight_toRightOf="@id/HomeFragTopCons"
+                    app:layout_constraintTop_toTopOf="@id/HomeFragTopCons" />
+
+                <!--搜索点击栏-->
+                <TextView
+                    android:id="@+id/HomeFragSearchText"
+                    android:layout_width="0dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:layout_marginRight="@dimen/dp_14"
+                    android:background="@drawable/white_radius_10_shape"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_44"
+                    android:text="@string/search_fund"
+                    android:textColor="@color/black_333"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintBottom_toBottomOf="@id/HomeFragSearchBg"
+                    app:layout_constraintLeft_toLeftOf="@id/HomeFragSearchBg"
+                    app:layout_constraintRight_toRightOf="@id/HomeFragSearchBg"
+                    app:layout_constraintTop_toTopOf="@id/HomeFragSearchBg" />
+
+                <ImageView
+                    android:id="@+id/HomeFragSearchImg"
+                    android:layout_width="@dimen/dp_16"
+                    android:layout_height="@dimen/dp_16"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/black_search"
+                    app:layout_constraintBottom_toBottomOf="@id/HomeFragSearchText"
+                    app:layout_constraintLeft_toLeftOf="@id/HomeFragSearchText"
+                    app:layout_constraintTop_toTopOf="@id/HomeFragSearchText" />
+
+                <!--基金筛选图-->
+                <ImageView
+                    android:id="@+id/HomeFragSelector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginRight="@dimen/dp_14"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/HomeFragSearchBg" />
 
 
-            <View
-                android:layout_width="@dimen/dp_4"
-                android:layout_height="@dimen/dp_14"
-                android:id="@+id/HomeFragChartLine"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/HomeFragChartTitle"
-                app:layout_constraintBottom_toBottomOf="@id/HomeFragChartTitle"
-                android:background="@color/main_blue"
-                android:layout_marginLeft="@dimen/dp_14"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/HomeFragChartTitle"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragChartLine"
-                app:layout_constraintTop_toBottomOf="@+id/HomeFragSelector"
-                android:textSize="@dimen/sp_14"
-                android:textColor="@color/black_333"
-                android:text="@string/fund_300_compare"
-                android:layout_marginLeft="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_14"/>
+                <View
+                    android:id="@+id/HomeFragChartLine"
+                    android:layout_width="@dimen/dp_4"
+                    android:layout_height="@dimen/dp_14"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:background="@color/main_blue"
+                    app:layout_constraintBottom_toBottomOf="@id/HomeFragChartTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/HomeFragChartTitle" />
 
-            <!--股票型Tag-->
-            <View
-                android:layout_width="@dimen/dp_8"
-                android:layout_height="@dimen/dp_2"
-                android:id="@+id/HomeFragBlueStock"
-                app:layout_constraintLeft_toLeftOf="@id/HomeFragChartLine"
-                app:layout_constraintTop_toTopOf="@+id/HomeFragBlueStockTag"
-                app:layout_constraintBottom_toBottomOf="@+id/HomeFragBlueStockTag"
-                android:background="@color/main_blue" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/HomeFragBlueStockTag"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragBlueStock"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle"
-                android:layout_marginTop="@dimen/dp_6"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/main_blue"
-                android:text="@string/stock_type" />
-            <!--混合型Tag-->
-            <View
-                android:layout_width="@dimen/dp_8"
-                android:layout_height="@dimen/dp_2"
-                android:id="@+id/HomeFragYellowMixed"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragBlueStockTag"
-                app:layout_constraintTop_toTopOf="@+id/HomeFragYellowMixedTag"
-                app:layout_constraintBottom_toBottomOf="@+id/HomeFragYellowMixedTag"
-                android:background="@color/yellow_FFCF00"
-                android:layout_marginLeft="@dimen/dp_14"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/HomeFragYellowMixedTag"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragYellowMixed"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle"
-                android:layout_marginTop="@dimen/dp_6"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/yellow_FFCF00"
-                android:text="@string/mix_type" />
-            <!--沪深300Tag-->
-            <View
-                android:layout_width="@dimen/dp_8"
-                android:layout_height="@dimen/dp_2"
-                android:id="@+id/HomeFragRedHuShen"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragYellowMixedTag"
-                app:layout_constraintTop_toTopOf="@+id/HomeFragYellowMixedTag"
-                app:layout_constraintBottom_toBottomOf="@+id/HomeFragRedHuShenTag"
-                android:background="@color/red_FA1D05"
-                android:layout_marginLeft="@dimen/dp_14"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/HomeFragRedHuShenTag"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragRedHuShen"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle"
-                android:layout_marginTop="@dimen/dp_6"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/red_FA1D05"
-                android:text="@string/hs_300" />
+                <TextView
+                    android:id="@+id/HomeFragChartTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:text="@string/fund_300_compare"
+                    android:textColor="@color/black_333"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintLeft_toRightOf="@id/HomeFragChartLine"
+                    app:layout_constraintTop_toBottomOf="@+id/HomeFragSelector" />
 
-            <!--沪深300走势比较页集-->
-            <androidx.viewpager2.widget.ViewPager2
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/HomeFragChartPager"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragBlueStockTag"
-                android:layout_marginLeft="@dimen/dp_14"
-                android:layout_marginRight="@dimen/dp_14"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/white" />
-            <com.google.android.material.tabs.TabLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_44"
-                android:id="@+id/HomeFragChatTab"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/HomeFragTopCons"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragChartPager"
-                android:layout_marginLeft="@dimen/dp_14"
-                android:layout_marginRight="@dimen/dp_14"
-                android:layout_marginBottom="@dimen/dp_14"
-                app:tabIndicatorHeight="0dp"
-                app:tabMode="auto"
-                app:tabMinWidth="@dimen/dp_60"
-                app:tabMaxWidth="@dimen/dp_80"
-                app:tabPaddingStart="@dimen/dp_4"
-                android:paddingEnd="@dimen/dp_4"
-                app:tabGravity="center"
-                app:tabRippleColor="@android:color/transparent"
-                android:overScrollMode="never"/>
+                <!--股票型Tag-->
+                <View
+                    android:id="@+id/HomeFragBlueStock"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_2"
+                    android:background="@color/main_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/HomeFragBlueStockTag"
+                    app:layout_constraintLeft_toLeftOf="@id/HomeFragChartLine"
+                    app:layout_constraintTop_toTopOf="@+id/HomeFragBlueStockTag" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/HomeFragBlueStockTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@string/stock_type"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintLeft_toRightOf="@id/HomeFragBlueStock"
+                    app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle" />
+                <!--混合型Tag-->
+                <View
+                    android:id="@+id/HomeFragYellowMixed"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_2"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:background="@color/yellow_FFCF00"
+                    app:layout_constraintBottom_toBottomOf="@+id/HomeFragYellowMixedTag"
+                    app:layout_constraintLeft_toRightOf="@id/HomeFragBlueStockTag"
+                    app:layout_constraintTop_toTopOf="@+id/HomeFragYellowMixedTag" />
+
+                <TextView
+                    android:id="@+id/HomeFragYellowMixedTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@string/mix_type"
+                    android:textColor="@color/yellow_FFCF00"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintLeft_toRightOf="@id/HomeFragYellowMixed"
+                    app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle" />
+                <!--沪深300Tag-->
+                <View
+                    android:id="@+id/HomeFragRedHuShen"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_2"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:background="@color/red_FA1D05"
+                    app:layout_constraintBottom_toBottomOf="@+id/HomeFragRedHuShenTag"
+                    app:layout_constraintLeft_toRightOf="@id/HomeFragYellowMixedTag"
+                    app:layout_constraintTop_toTopOf="@+id/HomeFragYellowMixedTag" />
+
+                <TextView
+                    android:id="@+id/HomeFragRedHuShenTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@string/hs_300"
+                    android:textColor="@color/red_FA1D05"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintLeft_toRightOf="@id/HomeFragRedHuShen"
+                    app:layout_constraintTop_toBottomOf="@id/HomeFragChartTitle" />
+
+                <!--沪深300走势比较页集-->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/HomeFragChartPager"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_14"
+                    android:background="@color/white"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/HomeFragBlueStockTag" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/HomeFragChatTab"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginLeft="@dimen/dp_14"
+                    android:layout_marginRight="@dimen/dp_14"
+                    android:layout_marginBottom="@dimen/dp_14"
+                    android:overScrollMode="never"
+                    android:paddingEnd="@dimen/dp_4"
+                    app:layout_constraintBottom_toBottomOf="@id/HomeFragTopCons"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/HomeFragChartPager"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMaxWidth="@dimen/dp_80"
+                    app:tabMinWidth="@dimen/dp_60"
+                    app:tabMode="auto"
+                    app:tabPaddingStart="@dimen/dp_4"
+                    app:tabRippleColor="@android:color/transparent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -210,6 +216,7 @@
                 android:id="@+id/HomeFragTopTab"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_44"
+                android:elevation="1dp"
                 android:overScrollMode="never"
                 app:layout_constraintLeft_toLeftOf="@id/HomeFragBtmCons"
                 app:layout_constraintRight_toRightOf="@id/HomeFragBtmCons"
@@ -223,8 +230,7 @@
                 app:tabMode="scrollable"
                 app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@color/main_blue"
-                app:tabTextColor="@color/gray_666"
-                android:elevation="1dp"/>
+                app:tabTextColor="@color/gray_666" />
             <!--二级Tab-->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/HomeFragSecondTab"
@@ -248,134 +254,136 @@
 
             <!--名称代码-->
             <TextView
+                android:id="@+id/HeadLeftText"
                 android:layout_width="@dimen/dp_98"
                 android:layout_height="@dimen/dp_38"
-                android:id="@+id/HeadLeftText"
-                app:layout_constraintLeft_toLeftOf="@id/HomeFragSecondTab"
-                app:layout_constraintTop_toBottomOf="@id/HomeFragSecondTab"
-                android:textSize="@dimen/sp_14"
-                android:textColor="@color/black_333"
+                android:background="@drawable/gray_side"
                 android:gravity="center"
                 android:text="@string/name_code"
-                android:background="@drawable/gray_side"/>
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragSecondTab"
+                app:layout_constraintTop_toBottomOf="@id/HomeFragSecondTab" />
+
             <ImageView
+                android:id="@+id/HeadLeftSortImg"
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="wrap_content"
-                android:id="@+id/HeadLeftSortImg"
-                app:layout_constraintRight_toRightOf="@id/HeadLeftText"
-                app:layout_constraintTop_toTopOf="@id/HeadLeftText"
-                app:layout_constraintBottom_toBottomOf="@id/HeadLeftText"
                 android:layout_marginRight="@dimen/dp_4"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/da_xiao"
-                android:tag="1"/>
+                android:tag="1"
+                app:layout_constraintBottom_toBottomOf="@id/HeadLeftText"
+                app:layout_constraintRight_toRightOf="@id/HeadLeftText"
+                app:layout_constraintTop_toTopOf="@id/HeadLeftText" />
             <!--右部列表滑动-->
             <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
+                android:id="@+id/HeadRightScroll"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_38"
-                android:id="@+id/HeadRightScroll"
-                app:layout_constraintLeft_toRightOf="@id/HeadLeftText"
-                app:layout_constraintTop_toTopOf="@id/HeadLeftText"
-                app:layout_constraintBottom_toBottomOf="@id/HeadLeftText"
-                app:layout_constraintRight_toRightOf="parent"
                 android:overScrollMode="never"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="@id/HeadLeftText"
+                app:layout_constraintLeft_toRightOf="@id/HeadLeftText"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/HeadLeftText">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/HeadRightCons"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/HeadRightCons">
+                    android:layout_height="match_parent">
                     <!--日涨幅-->
                     <TextView
+                        android:id="@+id/DailyGains"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/DailyGains"
-                        app:layout_constraintLeft_toLeftOf="@id/HeadRightCons"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/daily_gains"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/daily_gains"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toLeftOf="@id/HeadRightCons"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                     <!--周涨幅-->
                     <TextView
+                        android:id="@+id/WeekGains"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/WeekGains"
-                        app:layout_constraintLeft_toRightOf="@id/DailyGains"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/week_gains"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/week_gains"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toRightOf="@id/DailyGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                     <!--月涨幅-->
                     <TextView
+                        android:id="@+id/MonthGains"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/MonthGains"
-                        app:layout_constraintLeft_toRightOf="@id/WeekGains"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/month_gains"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/month_gains"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toRightOf="@id/WeekGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                     <!--季度涨幅-->
                     <TextView
+                        android:id="@+id/QuarterGains"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/QuarterGains"
-                        app:layout_constraintLeft_toRightOf="@id/MonthGains"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/quarter_gains"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/quarter_gains"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toRightOf="@id/MonthGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                     <!--半年涨幅-->
                     <TextView
+                        android:id="@+id/HalfYearGains"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/HalfYearGains"
-                        app:layout_constraintLeft_toRightOf="@id/QuarterGains"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/half_year_gains"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/half_year_gains"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toRightOf="@id/QuarterGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                     <!--年涨幅-->
                     <TextView
+                        android:id="@+id/YearGains"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/YearGains"
-                        app:layout_constraintLeft_toRightOf="@id/HalfYearGains"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/year_gains"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/year_gains"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toRightOf="@id/HalfYearGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                     <!--基金规模-->
                     <TextView
+                        android:id="@+id/FundMode"
                         android:layout_width="@dimen/dp_88"
                         android:layout_height="@dimen/dp_38"
-                        android:id="@+id/FundMode"
-                        app:layout_constraintLeft_toRightOf="@id/YearGains"
-                        app:layout_constraintTop_toTopOf="@id/HeadRightCons"
-                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
-                        android:text="@string/fund_mode"
+                        android:background="@drawable/gray_side"
                         android:gravity="center"
+                        android:text="@string/fund_mode"
                         android:textColor="@color/black_333"
                         android:textSize="@dimen/sp_14"
-                        android:background="@drawable/gray_side"/>
+                        app:layout_constraintBottom_toBottomOf="@id/HeadRightCons"
+                        app:layout_constraintLeft_toRightOf="@id/YearGains"
+                        app:layout_constraintTop_toTopOf="@id/HeadRightCons" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
 
@@ -383,40 +391,45 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/HomeFragListCons"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/HomeFragBtmScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/HomeFragLeftList"
-            android:layout_width="@dimen/dp_98"
-            android:layout_height="0dp"
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toBottomOf="@id/HomeFragListCons"
-            app:layout_constraintLeft_toLeftOf="@id/HomeFragListCons"
-            app:layout_constraintTop_toTopOf="@id/HomeFragListCons" />
-
-        <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
-            android:id="@+id/HomeFragScroll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toBottomOf="@id/HomeFragLeftList"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@id/HomeFragLeftList"
-            app:layout_constraintRight_toRightOf="@id/HomeFragListCons"
-            app:layout_constraintTop_toTopOf="@+id/HomeFragLeftList">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HomeFragListCons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/HomeFragRightList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never" />
-        </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
+                android:id="@+id/HomeFragLeftList"
+                android:layout_width="@dimen/dp_98"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:layout_constraintLeft_toLeftOf="@id/HomeFragListCons"
+                app:layout_constraintTop_toTopOf="@id/HomeFragListCons" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
+                android:id="@+id/HomeFragScroll"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="@id/HomeFragLeftList"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toRightOf="@id/HomeFragLeftList"
+                app:layout_constraintRight_toRightOf="@id/HomeFragListCons"
+                app:layout_constraintTop_toTopOf="@+id/HomeFragLeftList">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/HomeFragRightList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+            </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -85,6 +85,7 @@ public class HomeFragPres extends BasePresenter{
             public void accept(ResMainRank resMainRank) throws Throwable {
                 if (resMainRank.isSuccess()){
                     EventBus.getDefault().post(new HomeRankEvent(true, resMainRank.getResultObj()));
+                    Log.d(TAG, "首页排行榜请求成功");
                 }else {
                     Log.d(TAG, String.format("首页排行榜请求失败:%s", resMainRank.getMessage()));
                     EventBus.getDefault().post(new HomeRankEvent(false, null));

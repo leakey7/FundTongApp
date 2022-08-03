@@ -7,7 +7,6 @@ import android.widget.HorizontalScrollView;
 public class MyHorScroll extends HorizontalScrollView {
 
     private HorizontalScrollView subScroll;
-    private OnScrollListenerForHorizontal listener;
 
     public MyHorScroll(Context context) {
         super(context);
@@ -32,15 +31,9 @@ public class MyHorScroll extends HorizontalScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-        if (subScroll!=null){
-            subScroll.scrollTo(l ,t);
-        }
-        if (listener!=null) {
-            listener.onScrollChanged(l, t, oldl, oldt);
+        if (subScroll != null) {
+            subScroll.scrollTo(l, t);
         }
     }
 
-    public void setListener(OnScrollListenerForHorizontal listener) {
-        this.listener = listener;
-    }
 }
