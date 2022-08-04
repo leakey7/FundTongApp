@@ -3,11 +3,12 @@ package com.gzyslczx.ncfundscreenapp.adapters;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.gzyslczx.ncfundscreenapp.R;
 import com.gzyslczx.ncfundscreenapp.beans.response.ResMainRankInfo;
 
-public class HomeRankRightAdapter extends BaseQuickAdapter<ResMainRankInfo, BaseViewHolder> {
+public class HomeRankRightAdapter extends BaseQuickAdapter<ResMainRankInfo, BaseViewHolder> implements LoadMoreModule {
     public HomeRankRightAdapter(int layoutResId) {
         super(layoutResId);
     }

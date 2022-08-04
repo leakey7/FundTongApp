@@ -8,8 +8,10 @@
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/drawable/btm_bar_home_selector.xml" value="0.252" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/drawable/btm_bar_mine_selector.xml" value="0.252" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/drawable/gray_side.xml" value="0.2525" />
+        <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/drawable/web_progress.xml" value="0.28" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/drawable/white_radius_10_shape.xml" value="0.252" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/layout/activity_web.xml" value="0.3078125" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/layout/home_fragment.xml" value="0.3651041666666667" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/layout/home_rank_left_header.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProjects/FundTongApp/app/src/main/res/layout/home_rank_left_item.xml" value="0.36614583333333334" />

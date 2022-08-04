@@ -391,7 +391,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <com.gzyslczx.ncfundscreenapp.tools.views.LoadMoreScroll
         android:id="@+id/HomeFragBtmScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -431,5 +431,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </com.gzyslczx.ncfundscreenapp.tools.views.LoadMoreScroll>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
