@@ -57,7 +57,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
     private HomeRankRightAdapter mRankRightAdapter;
 
     @Override
-    public View InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mViewBinding = HomeFragmentBinding.inflate(inflater, container, false);
         //沪深三百对比图切页
         mChatAdapter = new FragmentAdapter(this);
@@ -89,9 +89,11 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         mRankLeftAdapter.getLoadMoreModule().setOnLoadMoreListener(this::onLoadMore);
         mRankLeftAdapter.getLoadMoreModule().setAutoLoadMore(false);
         mRankRightAdapter.getLoadMoreModule().setAutoLoadMore(false);
+        if (mPresenter!=null){
+            Init();
+        }
         //注册EventBus
         EventBus.getDefault().register(this);
-        return mViewBinding.getRoot();
     }
 
     @Override
@@ -108,12 +110,24 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+        //注销EventBus
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //注销EventBus
-        EventBus.getDefault().unregister(this);
+        Log.d(TAG, "onDestroyView");
     }
 
     /*
@@ -207,7 +221,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> implements V
                     } else {
                         //跳转基金筛选Web
                         Log.d(TAG, String.format("跳转基金筛选：%s", mViewBinding.HomeFragSelector.getTag().toString()));
-                        Intent intent = new Intent(getContext(), WebActivity.class);
+                        Intent intent = new Intent(getActivity(), WebActivity.class);
                         intent.putExtra(WebActivity.WebPath, mViewBinding.HomeFragSelector.getTag().toString());
                         startActivity(intent);
                     }

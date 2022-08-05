@@ -2,9 +2,12 @@ package com.gzyslczx.ncfundscreenapp;
 
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
@@ -14,7 +17,10 @@ import com.gzyslczx.ncfundscreenapp.databinding.ActivityMainBinding;
 import com.gzyslczx.ncfundscreenapp.databinding.LoadingLayoutBinding;
 import com.gzyslczx.ncfundscreenapp.events.UpdateTokenEvent;
 import com.gzyslczx.ncfundscreenapp.fragments.BaseFragment;
+import com.gzyslczx.ncfundscreenapp.fragments.FindFragment;
 import com.gzyslczx.ncfundscreenapp.fragments.HomeFragment;
+import com.gzyslczx.ncfundscreenapp.fragments.MineFragment;
+import com.gzyslczx.ncfundscreenapp.fragments.OptionalFragment;
 import com.gzyslczx.ncfundscreenapp.presenter.MainActPresenter;
 import com.gzyslczx.ncfundscreenapp.tools.FragmentAdapter;
 import com.gzyslczx.ncfundscreenapp.tools.TokenTool;
@@ -34,6 +40,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private WindowInsetsControllerCompat mWICCompact;
     private FragmentAdapter mFragmentAdapter;
     private PopupWindow mLoadingView;
+    List<BaseFragment> fragments;
 
 
     @Override
@@ -52,13 +59,32 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mViewBinding.MainBottom.setItemIconTintList(null);
         mViewBinding.MainBottom.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
         //初始切页
-        mViewBinding.MainPagers.setUserInputEnabled(false);
-        mViewBinding.MainPagers.setOffscreenPageLimit(4);
         mFragmentAdapter = new FragmentAdapter(this);
         mFragmentAdapter.setFragments(InitFragments());
         //初始加载中试图
         LoadingLayoutBinding loadingLayoutBinding = LoadingLayoutBinding.bind(getLayoutInflater().inflate(R.layout.loading_layout, null));
         mLoadingView = new PopupWindow(loadingLayoutBinding.getRoot(), 200, 200);
+        //底部导航栏点击事件
+        mViewBinding.MainBottom.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.MainBottomHome:
+                        mViewBinding.MainPagers.setCurrentItem(0, false);
+                        break;
+                    case R.id.MainBottomFind:
+                        mViewBinding.MainPagers.setCurrentItem(1, false);
+                        break;
+                    case R.id.MainBottomSelect:
+                        mViewBinding.MainPagers.setCurrentItem(2, false);
+                        break;
+                    case R.id.MainBottomMine:
+                        mViewBinding.MainPagers.setCurrentItem(3, false);
+                        break;
+                }
+                return false;
+            }
+        });
         mLoadingView.setOutsideTouchable(false);
     }
 
@@ -93,14 +119,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     * */
     private void Init(){
         mViewBinding.MainPagers.setAdapter(mFragmentAdapter);
+        mViewBinding.MainPagers.setUserInputEnabled(false);
+        mViewBinding.MainPagers.setOffscreenPageLimit(4);
+        mViewBinding.MainPagers.setCurrentItem(0, false);
     }
 
     /*
     * 初始化Fragment集
     * */
     private List<BaseFragment> InitFragments(){
-        List<BaseFragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
+        fragments.add(new FindFragment());
+        fragments.add(new OptionalFragment());
+        fragments.add(new MineFragment());
         return fragments;
     }
 

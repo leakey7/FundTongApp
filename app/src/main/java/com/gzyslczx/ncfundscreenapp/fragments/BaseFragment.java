@@ -18,10 +18,11 @@ public abstract class BaseFragment<T extends ViewBinding> extends RxFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return InitView(inflater, container, savedInstanceState);
+        InitView(inflater, container, savedInstanceState);
+        return mViewBinding.getRoot();
     }
 
-    public abstract View InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+    public abstract void InitView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
 
 

@@ -391,45 +391,38 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.gzyslczx.ncfundscreenapp.tools.views.LoadMoreScroll
-        android:id="@+id/HomeFragBtmScroll"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeFragListCons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/HomeFragListCons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/HomeFragLeftList"
+            android:layout_width="@dimen/dp_98"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="@id/HomeFragListCons"
+            app:layout_constraintTop_toTopOf="@id/HomeFragListCons" />
+
+        <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
+            android:id="@+id/HomeFragScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@id/HomeFragLeftList"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/HomeFragLeftList"
+            app:layout_constraintRight_toRightOf="@id/HomeFragListCons"
+            app:layout_constraintTop_toTopOf="@+id/HomeFragLeftList">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/HomeFragLeftList"
-                android:layout_width="@dimen/dp_98"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                app:layout_constraintLeft_toLeftOf="@id/HomeFragListCons"
-                app:layout_constraintTop_toTopOf="@id/HomeFragListCons" />
+                android:id="@+id/HomeFragRightList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
 
-            <com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll
-                android:id="@+id/HomeFragScroll"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                app:layout_constraintBottom_toBottomOf="@id/HomeFragLeftList"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toRightOf="@id/HomeFragLeftList"
-                app:layout_constraintRight_toRightOf="@id/HomeFragListCons"
-                app:layout_constraintTop_toTopOf="@+id/HomeFragLeftList">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/HomeFragRightList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:overScrollMode="never" />
-            </com.gzyslczx.ncfundscreenapp.tools.views.MyHorScroll>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.gzyslczx.ncfundscreenapp.tools.views.LoadMoreScroll>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
